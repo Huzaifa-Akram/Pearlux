@@ -7,11 +7,11 @@
   --button-secondary-hover: #f2f2f2;
 
   display: grid;
-  grid-template-rows: 20px 1fr 20px;
+  grid-template-rows: 1fr 20px;
   align-items: center;
   justify-items: center;
-  min-height: 100svh;
-  padding: 80px;
+  min-height: calc(100vh - 80px);
+  padding: 40px 80px 80px;
   gap: 64px;
   font-family: var(--font-geist-sans);
 }
@@ -79,14 +79,22 @@
 }
 
 a.primary {
-  background: var(--foreground);
-  color: var(--background);
+  background: linear-gradient(
+    135deg,
+    var(--gold-primary, #d4af37) 0%,
+    var(--gold-secondary, #f4e774) 100%
+  );
+  color: var(--luxury-dark, #1a1a1a);
   gap: 8px;
+  font-weight: 600;
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
 }
 
 a.secondary {
-  border-color: var(--gray-alpha-200);
+  border-color: var(--gold-primary, #d4af37);
+  color: var(--gold-primary, #d4af37);
   min-width: 158px;
+  font-weight: 500;
 }
 
 .footer {
@@ -108,18 +116,32 @@ a.secondary {
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   a.primary:hover {
-    background: var(--button-primary-hover);
+    background: linear-gradient(
+      135deg,
+      var(--gold-accent, #b8860b) 0%,
+      var(--gold-primary, #d4af37) 100%
+    );
     border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(212, 175, 55, 0.4);
   }
 
   a.secondary:hover {
-    background: var(--button-secondary-hover);
+    background: linear-gradient(
+      135deg,
+      var(--gold-primary, #d4af37) 0%,
+      var(--gold-secondary, #f4e774) 100%
+    );
+    color: var(--luxury-dark, #1a1a1a);
     border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
   }
 
   .footer a:hover {
     text-decoration: underline;
     text-underline-offset: 4px;
+    color: var(--gold-primary, #d4af37);
   }
 }
 

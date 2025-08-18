@@ -1,6 +1,13 @@
 :root {
-  --background: #ffffff;
+  --background: #fafafa;
   --foreground: #171717;
+  --gold-primary: #d4af37;
+  --gold-secondary: #f4e774;
+  --gold-accent: #b8860b;
+  --luxury-dark: #1a1a1a;
+  --luxury-darker: #0f0f0f;
+  --pearl-white: #f8f6f0;
+  --stone-gray: #2d2d2d;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -10,18 +17,78 @@
   }
 }
 
+/* Prevent duplicate scrollbars - only allow default page scroll */
+html {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  scroll-behavior: smooth;
+  height: 100%;
 }
 
 body {
   color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(
+    135deg,
+    var(--background) 0%,
+    var(--pearl-white) 100%
+  );
+  font-family: var(
+    --font-geist-sans,
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif
+  );
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+/* Main content padding to account for fixed navbar */
+.main-content {
+  padding-top: 100px; /* Desktop navbar height + buffer */
+  overflow: visible; /* Prevent additional scrollbars */
+}
+
+/* Remove scrollbars from navbar components */
+nav,
+[class*="navbar"],
+[class*="navContainer"],
+[class*="centerSection"],
+[class*="navLinks"] {
+  overflow: visible !important;
+}
+
+@media (max-width: 1024px) {
+  .main-content {
+    padding-top: 90px; /* Tablet navbar height + buffer */
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding-top: 80px; /* Mobile navbar height + buffer */
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: linear-gradient(
+      135deg,
+      var(--luxury-darker) 0%,
+      var(--luxury-dark) 100%
+    );
+  }
 }
 
 * {
@@ -33,6 +100,20 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+button {
+  border: none;
+  outline: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input {
+  border: none;
+  outline: none;
+  font-family: inherit;
 }
 
 @media (prefers-color-scheme: dark) {
