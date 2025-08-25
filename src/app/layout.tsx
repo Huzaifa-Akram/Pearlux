@@ -24,8 +24,25 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Schema.org structured data for better SEO
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Pearlux",
+    url: "https://pearlux.pk",
+    logo: "https://pearlux.pk/Pearlux.svg",
+    description: "Premium Pearls, Stones & Embroidery Materials",
+    sameAs: ["https://facebook.com/pearlux", "https://instagram.com/pearlux"],
+  };
+
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Navbar />
         <main className="main-content">{children}</main>

@@ -1,97 +1,59 @@
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import styles from "./Navbar.module.css";
-import SearchBar from "./SearchBar";
-import MobileMenu from "./MobileMenu";
+import NavbarClient from "./NavbarClient";
+import "./Navbar.css";
+
+// navLinks moved to NavbarClient.tsx to be shared between desktop and mobile menu
+
+// List of navigation links for desktop view only
+const navLinks = [
+  { name: "Embroidery Materials", href: "/embroidery-materials" },
+  { name: "Beads", href: "/beads" },
+  { name: "Embellishments", href: "/embellishments" },
+  { name: "Jewelry Making", href: "/jewelry-making" },
+  { name: "Sale", href: "/sale" },
+  { name: "Fresh Arrivals", href: "/fresh-arrivals" },
+  { name: "Best Sellers", href: "/best-sellers" },
+  { name: "Blog", href: "/blog" },
+];
 
 const Navbar = () => {
   return (
-    <header className={styles.navbar} role="banner">
-      <div className={styles.navContainer}>
-        {/* Logo Section */}
-        <div className={styles.logoSection}>
+    <header className="navbar-container">
+      <div className="navbar-top">
+        <div className="logo-container">
           <Link
             href="/"
-            aria-label="Pearlux - Premium Pearls, Stones & Embroidery Materials"
+            style={{ display: "flex", alignItems: "center" }}
+            title="Pearlux - Home"
+            aria-label="Pearlux - Home"
           >
             <Image
               src="/Pearlux.svg"
-              alt="Pearlux Logo - Premium luxury materials"
-              width={180}
-              height={80}
-              className={styles.logo}
+              alt="Pearlux - Premium Pearls, Stones & Embroidery Materials"
+              width={220}
+              height={60}
               priority
+              style={{ display: "block" }}
             />
           </Link>
         </div>
-
-        {/* Desktop Navigation Links */}
-        <nav
-          className={styles.centerSection}
-          role="navigation"
-          aria-label="Main navigation"
-        >
-          <ul className={styles.navLinks} role="menubar">
-            <li role="none">
-              <Link
-                href="/"
-                className={styles.navLink}
-                role="menuitem"
-                aria-label="Home - Pearlux main page"
-              >
-                Home
-              </Link>
-            </li>
-            <li role="none">
-              <Link
-                href="/pearls"
-                className={styles.navLink}
-                role="menuitem"
-                aria-label="Pearls - Premium pearl collection"
-              >
-                Pearls
-              </Link>
-            </li>
-            <li role="none">
-              <Link
-                href="/stones"
-                className={styles.navLink}
-                role="menuitem"
-                aria-label="Stones - Precious stone collection"
-              >
-                Stones
-              </Link>
-            </li>
-            <li role="none">
-              <Link
-                href="/embroidery"
-                className={styles.navLink}
-                role="menuitem"
-                aria-label="Embroidery - Luxury embroidery materials"
-              >
-                Embroidery
-              </Link>
-            </li>
-            <li role="none">
-              <Link
-                href="/collections"
-                className={styles.navLink}
-                role="menuitem"
-                aria-label="Collections - View all product collections"
-              >
-                Collections
-              </Link>
-            </li>
-          </ul>
-        </nav>
-
-        {/* Search Bar Component */}
-        <SearchBar />
-
-        {/* Mobile Menu Component */}
-        <MobileMenu />
+        <div className="search-container">
+          <NavbarClient />
+        </div>
       </div>
+      {/* Desktop navigation - this will be hidden on mobile */}
+      <nav className="navbar-bottom" aria-label="Main navigation">
+        <ul>
+          {navLinks.map((link) => (
+            <li key={link.name}>
+              <Link href={link.href} title={`Browse ${link.name}`}>
+                {link.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </header>
   );
 };

@@ -1,0 +1,351 @@
+/* Pearlux Navbar Styles */
+
+:root {
+  --pearlux-gold: #d8a635;
+  --pearlux-white: #f8f6f0;
+  --pearlux-dark: #1a1a1a;
+  --pearlux-gray: #f0f0f0;
+}
+
+/* Accessibility - Visually hidden elements but still accessible to screen readers */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.navbar-container {
+  width: 100%;
+  background-color: var(--pearlux-white);
+  border-bottom: 1px solid var(--pearlux-gray);
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logo-container {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.search-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 2rem;
+  width: 100%;
+  height: 60px; /* Match the height of the logo */
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  overflow: hidden;
+  margin: 0 auto;
+  height: 48px; /* Fixed height for better alignment */
+}
+
+.search-input {
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  flex-grow: 1;
+  background-color: #fff;
+  color: var(--pearlux-dark);
+}
+
+.search-input:focus {
+  outline: none;
+}
+
+.search-button {
+  background-color: var(--pearlux-gold);
+  border: none;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #c7962e; /* Darker gold */
+}
+
+.navbar-bottom {
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid var(--pearlux-gray);
+  padding-top: 1rem;
+}
+
+.navbar-bottom ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.navbar-bottom ul li a {
+  text-decoration: none;
+  color: var(--pearlux-dark);
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.5rem 0;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.navbar-bottom ul li a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--pearlux-gold);
+  transition: width 0.3s ease;
+}
+
+.navbar-bottom ul li a:hover {
+  color: var(--pearlux-gold);
+}
+
+.navbar-bottom ul li a:hover::after {
+  width: 100%;
+}
+
+/* Mobile Menu Button */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  height: 100%;
+}
+
+.mobile-menu-button {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10;
+  margin-left: 15px;
+}
+
+.mobile-menu-button span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--pearlux-dark);
+  transition: all 0.3s linear;
+}
+
+.mobile-menu-button.open span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.mobile-menu-button.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-button.open span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Mobile Menu */
+.mobile-menu-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  /* Using will-change for better performance */
+  will-change: opacity, visibility;
+}
+
+.mobile-menu-backdrop.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 80%;
+  max-width: 300px;
+  height: 100vh;
+  background-color: var(--pearlux-white);
+  z-index: 100;
+  transition: right 0.3s ease;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  /* Using will-change for better performance */
+  will-change: right;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-menu.open {
+  right: 0;
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--pearlux-gray);
+  background-color: var(--pearlux-white);
+}
+
+.mobile-logo {
+  display: flex;
+  align-items: center;
+}
+
+.mobile-company-name {
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--pearlux-gold);
+  margin: 0;
+  letter-spacing: 1.5px;
+  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.08);
+  transition: color 0.3s ease;
+  font-family: "Times New Roman", serif; /* More luxurious font */
+}
+
+.mobile-company-name:hover {
+  color: #c7962e; /* Slightly darker gold on hover */
+}
+
+.mobile-menu-close {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--pearlux-dark);
+  padding: 0.5rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.mobile-menu-close:hover {
+  color: var(--pearlux-gold);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.mobile-menu-close svg {
+  display: block;
+}
+
+.mobile-menu nav {
+  padding: 1.5rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.mobile-menu nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mobile-menu nav ul li a {
+  text-decoration: none;
+  color: var(--pearlux-dark);
+  font-weight: 500;
+  font-size: 1.1rem;
+  display: block;
+  padding: 0.5rem 0.5rem;
+  border-bottom: 1px solid var(--pearlux-gray);
+}
+
+.mobile-menu nav ul li a:hover {
+  color: var(--pearlux-gold);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 1rem;
+  }
+
+  .navbar-top {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .search-container {
+    margin: 0;
+    width: 100%;
+    height: auto;
+  }
+
+  .search-form {
+    max-width: 100%;
+  }
+
+  .navbar-actions {
+    justify-content: space-between;
+  }
+
+  .mobile-menu-spacer {
+    width: 30px; /* Same as the hamburger button width */
+  }
+
+  .navbar-bottom {
+    display: none; /* Hide desktop menu on mobile */
+  }
+
+  .mobile-menu-button {
+    display: flex;
+  }
+
+  /* No longer modifying body scroll behavior */
+}
